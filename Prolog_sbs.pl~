@@ -1,0 +1,524 @@
+
+
+:- use_module(library(pce)).
+%libreria para la interfaz(creacion botones)
+ :- pce_image_directory('./imagenes').
+%directorio donde se guardan las imagenes
+ :- use_module(library(pce_style_item)).
+ :- dynamic color/2.
+
+%carga imagenes
+ %enfermedades
+resource(fibrosis, image, image('fibrosis.jpg')).
+ resource(rinitis, image, image('rinitis.jfif')).
+ resource(silicosis, image, image('silicosis.jpg')).
+ resource(amigdalitis, image, image('amigdalitis.jpg')).
+ resource(efisemapulmonar, image, image('efisema.jpg')).
+ resource(neumotorax, image, image('neumotorax.jpg')).
+ resource(bronquiliotis, image, image('bronquiliotis.jpg')).
+ resource(epoc, image, image('epoc.jpg')).
+ resource(apnea, image, image('apnea.jpg')).
+ resource(bronquitis, image, image('bronquitis.jpg')).
+ resource(neumonia, image, image('neumonia.jpg')).
+ resource(asma, image, image('asma.jpg')).
+ resource(resfriadocomun, image, image('resfriado.jpg')).
+ resource(influenza, image, image('influenza.jpg')).
+ resource(faringitis, image, image('faringitis.jpg')).
+ resource(sinusitis, image, image('sinusitis.jpg')).
+ resource(laringitis, image, image('laringitis.jpg')).
+ resource(epligotitis, image, image('epligotitis.jpg')).
+ %sintomas
+  resource(estornudos, image, image('estornudos.jpg')).
+ resource(comezonnariz, image, image('comezonnariz.jpg')).
+resource(mocohialino, image, image('mocohialino.jpg')).
+ resource(ojosll, image, image('ojosll.jpg')).
+ resource(narizc, image, image('narizc.jpg')).
+ resource(comezonojos, image, image('comezonojos.jpg')).
+ resource(comezonpaladar, image, image('comezonpaladar.jpg')).
+  resource(agentestoxicos, image, image('agentestoxicos.jpg')).
+resource(disnea, image, image('disnea.jpg')).
+ resource(debilidad, image, image('debilidad.jpg')).
+resource(fiebre, image, image('fiebre.jpg')).
+ resource(faltaaire, image, image('faltaaire.jpg')).
+ resource(problemaspiel, image, image('problemaspiel.jpg')).
+ resource(tos, image, image('tos.jpg')).
+ resource(cianosisdedos, image, image('cianosisdedos.jpg')).
+ resource(secresion, image, image('secresion.jpg')).
+ resource(ausenciatos, image, image('ausenciatos.jpg')).
+ resource(astenia, image, image('astenia.jpg')).
+ resource(dificultadr, image, image('dificultadr.jpg')).
+ resource(tabaco, image, image('tabaco.jpg')).
+ resource(dolor, image, image('dolor.jpg')).
+resource(coloracionr, image, image('coloracionr.jpg')).
+ resource(odinofragia, image, image('odinofragia.jpg')).
+ resource(tosseca, image, image('tosseca.jpg')).
+ resource(dolorotoracico, image, image('dolorotoracico.jpg')).
+ resource(dolortoracico, image, image('dolortoracico.jpg')).
+resource(dolorabdominal, image, image('dolorabdominal.jpg')).
+ resource(pocoapetito, image, image('pocoapetito.jpg')).
+ resource(sialorrea, image, image('sialorrea.jpg')).
+ resource(vomito, image, image('vomito.jpg')).
+ resource(tiraje, image, image('tiraje.jpg')).
+ resource(obesidad, image, image('obesidad.jpg')).
+ resource(ronquidos, image, image('ronquidos.jpg')).
+ resource(respiracionespausadas, image, image('respiracionespausadas.jpg')).
+resource(obesidad, image, image('obesidad.jpg')).
+ resource(epiglotis, image, image('epiglotis.jpg')).
+ resource(tosno, image, image('tosno.jpg')).
+ resource(fatiga, image, image('fatiga.jpg')).
+ resource(estertores, image, image('estertores.jpg')).
+ resource(toracico, image, image('toracico.jpg')).
+ resource(aleteonasal, image, image('aleteonasal.jpg')).
+ resource(xifoidea, image, image('xifoidea.jpg')).
+ resource(silbidotos, image, image('silbidotos.jpg')).
+ resource(antecedentes, image, image('antecedentes.jpg')).
+ resource(dificultadr, image, image('dificultadr.jpg')).
+resource(dolorcrecu, image, image('dolorcrecu.jpg')).
+ resource(diarrea, image, image('diarrea.jpg')).
+ resource(dolorf, image, image('dolorf.jpg')).
+ resource(malaliento, image, image('malaliento.jpg')).
+ resource(alteraciongusto, image, image('alteraciongusto.jpg')).
+resource(sonidosjadeo, image, image('sonido.jpg')).
+ resource(tosconvomito, image, image('tosconvomito.jpg')).
+ resource(inflamacionb, image, image('inflamacionb.jpg')).
+%principal
+resource(img_principal, image, image('img_principal.jpg')).
+ resource(portada, image, image('portada.jpg')).
+
+%llamado a imagenes con bitmap y se define la posicion-bitmap inicializa
+
+ mostrar_imagen(Pantalla, Imagen) :- new(Figura, figure),
+                                     new(Bitmap, bitmap(resource(Imagen),@on)),
+                                     send(Bitmap, name, 1),
+                                     send(Figura, display, Bitmap),
+                                     send(Figura, status, 1),
+                                     send(Pantalla, display,Figura,point(0,0)).
+  mostrar_imagen_tratamiento(Pantalla, Imagen) :-new(Figura, figure),
+                                     new(Bitmap, bitmap(resource(Imagen),@on)),
+                                     send(Bitmap, name, 1),
+                                     send(Figura, display, Bitmap),
+                                     send(Figura, status, 1),
+                                     send(Pantalla, display,Figura,point(60,180)).
+ nueva_imagen(Ventana, Imagen) :-new(Figura, figure),
+                                new(Bitmap, bitmap(resource(Imagen),@on)),
+                                send(Bitmap, name, 1),
+                                send(Figura, display, Bitmap),
+                                send(Figura, status, 1),
+                                send(Ventana, display,Figura,point(0,0)).
+  imagen_pregunta(Ventana, Imagen) :-new(Figura, figure),
+                                new(Bitmap, bitmap(resource(Imagen),@on)),
+                                send(Bitmap, name, 1),
+                                send(Figura, display, Bitmap),
+                                send(Figura, status, 1),
+                                send(Ventana, display,Figura,point(500,80)).
+%pce botones/muestra
+  botones:-borrado,
+                send(@boton, free),
+                send(@btntratamiento,free),
+                mostrar_diagnostico(Enfermedad),
+                send(@texto, selection('Diagnostico:')),
+                send(@resp1, selection(Enfermedad)),
+                new(@boton, button('Empezar preguntas',
+                message(@prolog, botones)  )),
+
+                %boton para tratamiento
+new(@btntratamiento,button('Tratamiento',
+ message(@prolog, mostrar_tratamiento,Enfermedad)  )),
+send(@main, display,@boton,point(20,450)),
+send(@main, display,@btntratamiento,point(150,450)).
+
+
+
+  mostrar_tratamiento(X):-new(@tratam, dialog('Tratamiento')),
+                          %send(@tratam, append, label(nombre, 'Explicacion: ')),
+                          send(@tratam, display,@lblExp1,point(70,5)),
+                          send(@tratam, display,@lblExp2,point(50,80)),
+                          send(@tratam, display,@r1,point(15,30)),
+                          send(@tratam, display,@r2,point(15,50)),
+                          send(@tratam, display,@r3,point(15,70)),
+                          send(@tratam, display,@r4,point(15,90)),
+                          send(@tratam, display,@r5,point(15,110)),
+
+                          tratamiento(X),
+                          send(@tratam, transient_for, @main),
+                          send(@tratam, open_centered).
+
+%comparacion con cada enfermedad para llamar a su funcion
+tratamiento(X):- send(@lblExp1,selection('Conforme con el diagnostico el tratamiento dado es:')),
+                 mostrar_imagen_tratamiento(@tratam,X),
+                 tratamientoE(X).
+
+tratamientoE(X):-X == 'rinitis', enf_rinitis; X == 'silicosis', enf_silicosis; X == 'fibrosis', enf_fibrosis; X == 'amigdalitis', enf_amigdalitis; X == 'efisemapulmonar', enf_efisemapulmonar; X == 'neumotorax', enf_neumotorax; X == 'bronquiliotis', enf_bronquiliotis; X == 'epoc', enf_epoc; X == 'apnea', enf_apnea; X == 'bronquitis', enf_bronquitis; X == 'neumonia', enf_neumonia; X == 'asma', enf_asma; X == 'resfriadocomun', enf_resfriadocomun; X == 'influenza', enf_influenza; X == 'faringitis', enf_faringitis; X == 'sinusitis', enf_sinusitis; X == 'laringitis', enf_laringitis; X == 'epligotitis'.
+
+
+enf_rinitis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2, selection(' ')),
+send(@r3, selection(' ')),
+send(@r4, selection(' ')).
+
+enf_silicosis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection('Se prescribe antibioticos para las infecciones respiratorias')),
+send(@r3,selection('complementando con oxigeno, brincodilatadores y ')),
+send(@r4,selection('evitar la exposicion al silice para evitar un empeoramiento')).
+
+enf_fibrosis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection('Utilizar farmacos antifibroticos como complementar con')),
+send(@r3,selection('uso de oxigeno para facilitar la respiracion, se recomienda')),
+send(@r4,selection('administrar B2')).
+
+
+enf_amigdalitis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2  ,selection('Fomentar descanso, como proprocionar liquidos adecuados')),
+send(@r3  ,selection('para prevenir la deshidratacion, bocadillos frio pueden ayudar a aliviar el dolor de garganta ')),
+send(@r4  ,selection('en caso de ser necesario se recetara un antibiotico, como tambien antiinflamatorios y analgesicos')).
+
+enf_efisemapulmonar:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection('Ese puede no curarse, pero ayudara a aliviar los sintomas con el uso de  ')),
+send(@r3,selection('Broncodilatadores que ayudaran a aliviar la tos como la falta de aire, ')),
+send(@r4,selection('uso de antibioticos y/o cortcoesteroides inhalados para reducir la inflamacion')).
+
+enf_neumotorax:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection('Se busca aliviar la presion al puloim para permitir que este pueda expandirse,')),
+send(@r3,selection('por lo que estar en observacion con el paciente es fundamental como tambien')),
+send(@r4,selection('aspiracion con aguja, reparacion no quirurjuca, incluso terapias de oxigeno ')).
+
+enf_bronquiliotis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection('En la mayoria de los casos solo con cuidados domesticos este puede tratar')),
+send(@r3,selection('pero en caso de requerir medicamento lo mas comun es brindar antinflamatorios')),
+send(@r4,selection(' analgesicos o incluso puede llegarse a utilizar un broncodilator')).
+
+
+enf_EnfermedadPulmonarObstructivaCronica:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection('Se necesita que el paciente deje de fumar, y se le brinde al paciente la ayuda')),
+send(@r3,selection('necesaria, en caso de requerir medicametnos los brocodilatadores, los esterioides inhalables ')),
+send(@r3,selection('o pudiendo utilizar inhaladores combinados y por ultimo y no menos importante el uso de antibioticos')).
+
+enf_apnea:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection('Para aquellos casos leves se recomienda cambiar elementos de tu estilo de vida como ')),
+send(@r3,selection('adelgazar o dejar de fumar, en caso de que no se necesitaran terapidas con ayuda de dispostivos,')),
+send(@r4,selection('consistiendo en ejercer presion de aire por una mascarilla mientras duermes, en caso de que las terapias no funcionen')),
+send(@r5,selection('se requerira cirugia')).
+
+enf_bronquitis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection('Los remedios mas comunes son aquellos para el alivio de la tos ')),
+send(@r3,selection('se recomienda el uso de antiinflamatorios no esteroideos e.j. ibuprofeno ')),
+send(@r4,selection('y analgesicos para asi poder reducir dolor como inflamacion')).
+
+enf_neumonia:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection('Los remedios mas comunes son aquellos para el alivio de la tos ')),
+send(@r3,selection(' incluido los antifebriles y analgesicos para la fiebre y el malestar e.j. aspirina ')),
+send(@r4,selection(' antibioticos para el tratamiento de la neumonia bacteriana')).
+
+enf_asma:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection(' en estas situaciones es recomendable la  Administracion de B2')),
+send(@r3,selection(' ademas acomparlo con el uso de inhibidores de leucotrienos')),
+send(@r4,selection(' incluir en el tratamiento corticosteroides inhalados u orales')).
+
+enf_sinusitiscomun:-
+send(@r1,selection('Tratamiento:')),
+send(@r2  ,selection(' administrar analgesico para el dolor de las cabidades nasales')),
+send(@r3  ,selection(' acompanado de administracion de medicamentos antihistaminicos')).
+
+enf_influenza:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection(' Hacer uso de Medicamento antiviral para tratamiento de la gripe')),
+send(@r3,selection(' junto con la administracion de  inhibidores de la neuraminidasa para atacar el influenza')),
+send(@r4,selection(' es indispensable mantenerse hidratado')).
+
+enf_faringitis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection(' se recomienda el uso de Medicinas antiinflamatorias e.j. paracetamol ')),
+send(@r3,selection(' ademas incluir la administracion de acetaminofen para el dolor y la fiebre')).
+
+enf_sinusitis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2  ,selection(' uso de los antibioticos  en caso de sinusitis bacteriana')),
+send(@r3  ,selection(' junto con el uso de los antibioticos  en caso de una sinusitis bacteriana')).
+
+enf_laringitis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection(' Uso de Corticosteroides para reducir la inflamacion de las cuerdas vocales')),
+send(@r3,selection(' debe ir acompanado de esteroides orales o inhalados')),
+send(@r4,selection(' contar con oxigeno suplementario en caso de emergencia')).
+
+enf_epligotitis:-
+send(@r1,selection('Tratamiento:')),
+send(@r2,selection(' Se recomienda el uso de antimicrobianos')),
+send(@r3,selection(' es indispensable contar con oxigeno suplementario de respaldo')),
+send(@r4,selection(' complementar con administracion de esteroides orales o inhalados')).
+
+
+%boton para dar una respuesta
+   preguntar(Preg,Resp):-new(Di,dialog('Preguntas:')),
+                        new(L2,label(texto,'Responde las siguientes preguntas')),
+                        id_imagen_preg(Preg,Imagen),
+                        imagen_pregunta(Di,Imagen),
+                        new(La,label(prob,Preg)),
+                        new(B1,button(si,and(message(Di,return,si)))),
+                        new(B2,button(no,and(message(Di,return,no)))),
+                        send(Di, gap, size(25,25)),
+                        send(Di,append(L2)),
+                        send(Di,append(La)),
+                        send(Di,append(B1)),
+                        send(Di,append(B2)),
+                        send(Di,default_button,'si'),
+                        send(Di,open_centered),get(Di,confirm,Answer),
+                        free(Di),
+                        Resp=Answer.
+
+  %ventana primera funcion
+interfaz_principal:-new(@main,dialog('Enfermedades_respiratorias',
+        size(1000,1000))),
+        new(@texto, label(nombre,'El Diagnostico a partir de los datos es:',font('times','roman',18))),
+        new(@resp1, label(nombre,'',font('times','roman',24))),
+        new(@lblExp1, label(nombre,'',font('times','roman',14))),
+        new(@lblExp2, label(nombre,'',font('times','roman',14))),
+
+        new(@r1, label(nombre,'',font('times','roman',16))),
+        new(@r2, label(nombre,'',font('times','roman',14))),
+        new(@r3, label(nombre,'',font('times','roman',14))),
+        new(@r4, label(nombre,'',font('times','roman',14))),
+        new(@r5, label(nombre,'',font('times','roman',14))),
+        new(@r6, label(nombre,'',font('times','roman',14))),
+        new(@r7, label(nombre,'',font('times','roman',14))),
+        new(@r8, label(nombre,'',font('times','roman',14))),
+        new(@r9, label(nombre,'',font('times','roman',14))),
+        new(@salir,button('Salir del SE',and(message(@main,destroy),message(@main,free)))),
+        new(@boton, button('Comenzar diagnostico',message(@prolog, botones))),
+
+        new(@btntratamiento,button('‚¿Tratamiento?')),
+
+        nueva_imagen(@main, img_principal),
+        send(@main, display,@boton,point(138,450)),
+        send(@main, display,@texto,point(60,100)),
+        send(@main, display,@salir,point(300,450)),
+        send(@main, display,@resp1,point(100,150)),
+        send(@main,open_centered).
+
+       borrado:- send(@resp1, selection('')).
+%
+
+interfaz:- new(@interfaz,dialog('Sistema Experto ',
+  size(600,600))),
+
+  new(BotonComenzar,button('INICIAR',and(message(@prolog,interfaz_principal) ,
+  and(message(@interfaz,destroy),message(@interfaz,free)) ))),
+  new(BotonSalir,button('SALIR',and(message(@interfaz,destroy),message(@interfaz,free)))),
+
+   mostrar_imagen(@interfaz, portada),
+
+  %send(@interfaz,append(BotonComenzar)),
+  send(@interfaz, display,BotonComenzar,point(300,550)),
+  send(@interfaz, display,BotonSalir,point(400,550)),
+  %send(@interfaz,append(BotonSalir)),
+  % mostrar_imagen(@interfaz, portada),
+     send(@interfaz,open_centered).
+
+  :-interfaz.
+
+
+%base de conocimiento
+%preguntas de cada enfermedad para diagnosticar comienza con las preguntas de la primera enfermedad
+conocimiento('apnea',
+['¿Tiene obesidad?','¿Tiene respiraciones pausadas y prolongadas?','¿Tiene ronquidos fuertes?']).
+
+conocimiento('sinusitis',
+['¿Tiene dolor facial?', '¿Tiene alteraciones al gusto?','¿Tiene mal aliento?','¿Tiene nariz congestionada?']).
+
+conocimiento('rinitis',
+['¿Tiene estornudos continuos?', '¿Tiene comezon de nariz?',
+'¿Tiene moco nasal hialino (transparente y blanco)?','¿Tiene ojos llorosos?','¿Tiene nariz congestionada?','¿Tiene comezon de ojos?','¿Tiene comezon en el paladar?']).
+
+conocimiento('silicosis',
+['¿Ha estado en exposicion a agentes toxicos para vias respiratorias?', '¿Tiene disnea (dificultad para respirar)?','¿Sufre de debilidad?','¿Tiene fiebre?','¿Ha tenido falta de aire?']).
+
+conocimiento('fibrosis',['¿Tiene irritacion cutanea?',
+'¿Tiene disnea (dificultad para respirar)?', '¿Tiene tos?','¿Presenta cianosis (coloracion en los dedos)?']).
+
+%'¿Tiene baja oxigenacion?', solo se puede saber con aparato
+
+conocimiento('amigdalitis',
+['¿Ha presentado fiebre?', '¿Tiene secresion nasal?',
+ '¿Tiene astenia (cansancio)?','¿Tiene ausencia de tos?','¿Tiene dolor de garganta al ingerir alimento?','¿Tiene ausencia de tos?','¿Tiene nariz congestionada?']).
+
+conocimiento('efisemapulmonar',
+['¿Tiene disnea (dificultad para respirar)?', '¿Tiene tos?',
+ '¿Tiene coloracion rojiza en los pies?', '¿Ha consumido tabaco?']).
+
+conocimiento('neumotorax',
+['¿Tiene dolor de pecho?', '¿Tiene disnea (dificultad para respirar)?',
+ '¿Tiene tos seca?', '¿Presenta dolor toracico?']).
+
+conocimiento('bronquiliotis',
+['¿Tiene dolor abdominal?', '¿Tiene perdida de apetito?','¿Tiene disnea (dificultad para respirar)?',
+ '¿Tiene perdida de peso?', '¿Tiene tiraje intercostal ( movimiento de los musculos hacia adentro entre las costillas)?','¿Tiene sialorrea (exceso de saliva)?']).
+
+conocimiento('epoc',
+['¿Tiene dificultad para respirar?','¿Ha consumido tabaco?', '¿Tiene tiraje intercostal ( movimiento de los musculos hacia adentro entre las costillas)?']).
+
+
+conocimiento('bronquitis',
+['¿Tiene tos no productiva ?', '¿Tiene fatiga?','¿Tiene mucosidad transparente,blanca, gris, amarillento?']).
+
+conocimiento('neumonia',
+['¿Tiene fiebre?', '¿Tiene tos no productiva ?','¿Tiene estretores(ruidos anormales durante la respiracionn)?']).
+
+conocimiento('asma',
+['¿Tiene dificultad respiratoria?', '¿Ha tenido falta de aire?','¿Cuenta con Antecedentes heredofamiliares?','¿Se escucha un silbido cuando tose?']).
+
+conocimiento('resfriadocomun',
+['¿Tiene nariz congestionada?', '¿Tiene tos?','¿Tiene estornudos?','¿Tiene dolor de cabeza recurrente?','¿Tiene fiebre?','¿Tiene dolor de garganta al ingerir alimento?']).
+
+conocimiento('influenza',
+['¿Tiene dolor de garganta al ingerir alimento?', '¿Tiene dolor de cabeza recurrente?','¿Tiene tos?','¿Tiene fiebre?','¿Tiene nariz congestionada?','¿Tiene diarrea?']).
+
+conocimiento('faringitis',
+['¿Tiene nariz congestionada?', '¿Tiene tos?','¿Tiene fiebre?','¿Tiene dolor de garganta al ingerir alimento?']).
+
+
+conocimiento('laringitis',
+['¿Tiene tos con vomito?','¿Tiene cosquilleo y aspereza en la garganta?','¿Tiene perdida de voz?']).
+
+conocimiento('epligotitis',
+['¿Tiene alta produccion de saliva?','¿Tiene inflamacion bucofaringea?', '¿Tiene problemas para respirar?']).
+
+%ventanas de pregunta/imagen
+
+%rinitis
+id_imagen_preg('Tiene estornudos continuos?','estornudos').
+id_imagen_preg('Tiene comezon de nariz?','comezonnariz').
+id_imagen_preg('Tiene moco nasal hialino (transparente y blanco)?','mocohialino').
+id_imagen_preg('¿Tiene ojos llorosos?','ojosll').
+id_imagen_preg('¿Tiene nariz congestionada?','narizc').
+id_imagen_preg('¿Tiene comezon de ojos?','comezonojos').
+id_imagen_preg('¿Tiene comezon en el paladar?','comezonpaladar').
+
+%silicosis
+id_imagen_preg('¿Ha estado en exposicion a agentes toxicos para vias respiratorias?','agentestoxicos').
+id_imagen_preg('¿Tiene disnea (dificultad para respirar)?','disnea').
+id_imagen_preg('¿Sufre de debilidad?','debilidad').
+id_imagen_preg('¿Ha presentado fiebre?','fiebre').
+id_imagen_preg('¿Ha tenido falta de aire?','faltaaire').
+
+%fibrosis
+id_imagen_preg('¿Tiene problemas en la piel (eritema/edema)?','problemaspiel').
+id_imagen_preg('¿Tiene tos?','tos').
+id_imagen_preg('¿Presenta cianosis (coloracion en los dedos)?','cianosisdedos').
+
+%amigdalitis
+id_imagen_preg('¿Tiene secresion nasal?','secresion').
+id_imagen_preg('¿Tiene ausencia de tos?','ausenciatos').
+id_imagen_preg('¿Tiene dolor de garganta al ingerir alimento?','astenia').
+
+
+%efisema
+id_imagen_preg('¿Ha consumido tabaco?','tabaco').
+id_imagen_preg('¿Tiene colorazion rojiza en los pies?','coloracionr').
+
+%neumotorax
+id_imagen_preg('¿Tiene dolor de pecho?','odinofragia').
+id_imagen_preg('¿Tiene tos seca?','tosseca').
+id_imagen_preg('¿Presenta dolor toracico?','dolorotoracico').
+
+%bronquiliotis
+
+id_imagen_preg('¿Tiene perdida de peso?','pocoapetito').
+id_imagen_preg('¿Tiene sialorrea (exceso de saliva)?','sialorrea').
+id_imagen_preg('¿Tiene tiraje intercostal ( movimiento de los musculos hacia adentro entre las costillas)?','tiraje').
+
+%epoc
+id_imagen_preg('¿Tiene dolor abdominal?','dolorabdominal').
+
+%apnea
+id_imagen_preg('¿Tiene respiraciones pausadas y prolongadas?','respiracionespausadas').
+id_imagen_preg('¿Tiene obesidad?','obesidad').
+id_imagen_preg('¿Tiene ronquidos fuertes?','ronquidos').
+
+%bronquitis
+id_imagen_preg('¿Tiene tos no productiva?','tosno').
+id_imagen_preg('¿Tiene fatiga?','fatiga').
+id_imagen_preg('¿Tiene mucosidad transparente,blanca, gris, amarillento?','epiglotis').
+
+%neumonia
+id_imagen_preg('¿Tiene estretores(ruidos anormales durante la respiracion)?','estertores').
+
+%asma
+id_imagen_preg('¿Se escucha un silbido cuando tose?','silbidotos').
+id_imagen_preg('¿Cuenta con Antecedentes heredofamiliares?','antecedentes').
+id_imagen_preg('¿Tiene dificultad respiratoria?','dificultadr').
+
+%resfriado comun
+id_imagen_preg('¿Tiene dolor de cabeza recurrente?','dolorcrecu').
+
+%influenza
+d_imagen_preg('¿Tiene diarrea?','diarrea').
+%faringitis new
+%sinusitis
+id_imagen_preg('¿Tiene dolor facial?','dolorf').
+id_imagen_preg('¿Tiene alteraciones al gusto?','alteraciongusto').
+id_imagen_preg('¿Tiene mal aliento?','malaliento').
+%laringitis
+id_imagen_preg('¿Tiene cosquilleo y aspereza en la garganta ?','cosgarganta').
+id_imagen_preg('¿Tiene tos con vomito?','tosconvomito').
+id_imagen_preg('¿Tiene perdida de voz?','perdidavoz').
+%epligotitis
+id_imagen_preg('¿Tiene inflamacion bucofaringea?','inflamacion').
+
+%motor de inf
+:- dynamic conocido/1.
+
+  mostrar_diagnostico(X):-haz_diagnostico(X),limpiar_ventana.
+  mostrar_diagnostico(diagnostico_desconocido):-limpiar_ventana.
+
+  haz_diagnostico(Diagnosis):-
+                            obten_hipotesis_y_sintomas(Diagnosis,
+                            ListaDeSintomas),
+                            prueba_presencia_de(Diagnosis,
+                            ListaDeSintomas).
+
+
+obten_hipotesis_y_sintomas(Diagnosis, ListaDeSintomas):-
+                           conocimiento(Diagnosis, ListaDeSintomas).
+
+
+prueba_presencia_de(Diagnosis, []).
+prueba_presencia_de(Diagnosis, [Cabeza | Cola]):-
+  prueba_verdad_de(Diagnosis, Cabeza), prueba_presencia_de(Diagnosis, Cola).
+
+
+prueba_verdad_de(Diagnosis, Sintoma):- conocido(Sintoma).
+prueba_verdad_de(Diagnosis, Sintoma):-
+ not(conocido(is_false(Sintoma))),
+ pregunta_sobre(Diagnosis, Sintoma, Resp), Resp = 'si'.
+
+
+ pregunta_sobre(Diagnosis, Sintoma, Resp):-
+ preguntar(Sintoma,Respuesta),
+   process(Diagnosis, Sintoma, Respuesta, Resp).
+
+
+process(Diagnosis, Sintoma, si, si):- asserta(conocido(Sintoma)).
+
+process(Diagnosis, Sintoma, no, no):- asserta(conocido(is_false(Sintoma))).
+
+
+limpiar_ventana:- retract(conocido(X)), fail.
+limpiar_ventana.
+
+
+conocido(_):- fail.
+
+not(X):- X,!,fail.
+not(_).
